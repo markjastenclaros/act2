@@ -1,49 +1,56 @@
 import { Component } from '@angular/core';
-import { ContactServiceService } from '../services/contact-service.service';
-import {ToastController} from '@ionic/angular';
-
+import { AlertController, NavController} from '@ionic/angular';
+import {MessagePageModule} from '../pages/message/message.module';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-
-
-
 export class Tab3Page {
-  contName ="";
-  contNumber ="";
-  contacts: any =[];
+  contName = "";
+  contNumber = "";
+  contacts: any = [];
 
-  constructor(public contactService: ContactServiceService, public toast: ToastController){}
+  constructor(public alertCtrl: AlertController) { }
 
-  async ngOnInit(){
-    this.contactService.getData().then(data=> {
-        this.contacts = data;
-  });
+  saveContact() {
+    let contact = {
+      name: this.contName,
+      number: this.contNumber
+    }
+      this.contacts.push(contact);
+      this.clearField();
+    }
+
+  clearField() {
+    this.contName = "";
+    this.contNumber = "";
   }
 
-  saveC(){
-    this.contactService.saveContact({name: this.contName,number:this.contNumber}).then(data=>{
-      this.contacts =data;
-      this.clearField()
-
+  async showConfirm(cont){
+    const confirm = await this.alertCtrl.create({
+      message: 'Are you sure you want to delete this contact?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            console.log('Confirm Okay.');
+            let index = this.contacts.indexOf(cont);
+            if(index > -1){
+              this.contacts.splice(index, 1);
+            }
+          }
+        }
+      ]
     });
-  }
-
-  clearField(){
-    this.contName ="";
-    this.contNumber ="";
-  }
-
-  
+  await confirm.present();
 }
-
-  
-
-
-
-
-
-
+}
