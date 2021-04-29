@@ -1,0 +1,16 @@
+ion-img::part(image){
+    width:30%;
+    height:10%;
+    border-radius:20% ;
+    border-color: blue;
+    background-color: yellow;
+    border: 5px solid black;
+    float: left;
+
+}
+*center{
+    color: black;
+    font-style: yellow;
+    font-size: 20px;
+    background-color: yellow;
+}

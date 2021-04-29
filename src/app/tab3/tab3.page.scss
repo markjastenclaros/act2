@@ -1,0 +1,37 @@
+ion-img::part(image){
+    width:10%;
+    height:10%;
+    border-radius:20% ;
+    border-color: blue;
+    background-color: yellow;
+    border: 5px solid blue;
+    float: left;
+
+}
+*center{
+    color:blue;
+    font-style: yellow;
+    font-size: 30px;
+    background-color: yellow;
+}
+button:hover{
+    background-color:blue;
+}
+*center{
+    color: blue;
+    font-style: bold;
+    font-size: 50px;
+}
+*input{
+    background-color: blue;
+    color: yellow;
+
+
+
+
+}
+
+
+
+
+
